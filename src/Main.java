@@ -1,107 +1,34 @@
-import java.util.Arrays;
-
 public class Main {
-
-    private static final Employee[] employees = {
-        new Employee("Иванов Иван Иванович", 1, 50000),
-        new Employee("Иванов Макар Иванович", 2, 80000),
-        new Employee("Иванов Дмитрий Иванович", 3, 60000),
-        new Employee("Иванов Евгений Иванович", 4, 65000),
-        new Employee("Иванов Николай Иванович", 5, 73000),
-        new Employee("Иванов Максим Иванович", 1, 66000),
-        new Employee("Иванов Григорий Иванович", 2, 58000),
-        new Employee("Иванов Валерий Иванович", 3, 43000),
-        new Employee("Иванов Юрий Иванович", 4, 59000),
-        new Employee("Иванов Виталий Иванович", 5, 92000)
-    };
-    public static int getSalarySum(){
-        int sum = 0;
-        for ( int i = 0; i < employees.length; i++) {
-            sum += employees[i].getSalary();
-        }
-        return sum;
-    }
-    public static void printEmployees(){
-        for (Employee employee : employees) {
-            System.out.println(employee);
-        }
-    }
-    public static void minSalary(){
-        int min = employees[0].getSalary();
-        int id = 0;
-        for (int i = 0; i <employees.length; i++){
-            if (employees[i].getSalary() < min ){
-                min = employees[i].getSalary();
-                id = i;
-            }
-        }
-        System.out.println("Min: " + employees[id]);
-    }
-    public static void maxSalary(){
-        int max = employees[0].getSalary();
-        int id = 0;
-        for (int i = 0; i < employees.length; i++){
-            if (employees[i].getSalary() > max ){
-                max = employees[i].getSalary();
-                id = i;
-            }
-        }
-        System.out.println("Max: " + employees[id]);
-    }
-    public static void averageSalary(){
-        System.out.println(getSalarySum() / employees.length);
-    }
-    public static void printFio(){
-        for (Employee employee : employees) {
-            System.out.println(employee.getFio());
-        }
-    }
-    public static void indexSalary(int percent){
-
-        for ( int i = 0; i < employees.length; i++){
-            employees[i].setSalary( (int) (employees[i].getSalary() + employees[i].getSalary() * ( (double) percent / 100)));
-        }
-    }
-    public static void minDepartmentSalary(int department){
-        int min = 1000000000;
-        int id = 0;
-        for (int i = 0; i < employees.length; i++){
-            if (employees[i].getDepartment() == department){
-                if (employees[i].getSalary() < min) {
-                    min = employees[i].getSalary();
-                    id = i;
-                }
-            }
-        }
-        System.out.println(employees[id]);
-    }
-    public static void maxDepartmentSalary(int department){
-        int max = -1;
-        int id = 0;
-        for (int i = 0; i < employees.length; i++){
-            if (employees[i].getDepartment() == department){
-                if (employees[i].getSalary() > max) {
-                    max = employees[i].getSalary();
-                    id = i;
-                }
-            }
-        }
-        System.out.println(employees[id]);
-    }
-    public static int sumDepartmentSalary(int department){
-        int sum = 0;
-        for (int i = 0; i < employees.length; i++){
-            if (employees[i].getDepartment() == department){
-                sum += employees[i].getSalary();
-            }
-        }
-        return sum;
-    }
     public static void main(String[] args) {
-        System.out.println(sumDepartmentSalary(5));
+        EmployeeBook employeeBook = new EmployeeBook();
+
+        System.out.println("Печать всех");
+        employeeBook.printEmployees();
+        System.out.println();
+        employeeBook.deleteEmployee(4);
+        System.out.println("Печать всех после удаления");
+        employeeBook.printEmployees();
+        System.out.println("Печать всех");
+        System.out.println();
+
+        employeeBook.addEmployee("Петров Пётр Петрович", 2, 30000);
+        System.out.println("Печать всех после добавления");
+        employeeBook.printEmployees();
+        System.out.println();
+        employeeBook.printEmployeeId(4);
+        //  employeeBook.id(10);
+
+    //    employeeBook.salaryLessThanMax(80000);
+//        salaryLessThanMin(60000);
 
 
+//        printDepartmentEmployees(1);
+//        indexDepartmentSalary(1, 10);
+//        printDepartmentEmployees(1);
 
+        //averageDepartmentSalary(2);
+
+//        System.out.println(sumDepartmentSalary(5));
 
         // sumDepartmentSalary(5);
 //        maxSalary();

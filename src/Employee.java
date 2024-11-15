@@ -4,7 +4,7 @@ public class Employee {
 
     private String fio;
     private int department;
-    private int salary;
+    private double salary;
     private static int counter = 0;
     private int id;
 
@@ -12,16 +12,21 @@ public class Employee {
         this.fio = fio;
         this.department = department;
         this.salary = salary;
-        id = ++counter;
+        this.id = ++counter;
     }
-
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getFio() {
         return fio;
     }
     public int getDepartment() {
         return department;
     }
-    public int getSalary() {
+    double getSalary() {
         return salary;
     }
     public void setDepartment(int department) {
@@ -29,6 +34,9 @@ public class Employee {
     }
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+    public void setFio(String fio) {
+        this.fio = fio;
     }
 
     @Override
@@ -45,7 +53,10 @@ public class Employee {
     }
     @Override
     public String toString() {
-        return "Сотрудник " + id + ": " + fio + ", отдел: " + department + ", зарплата: " + salary;
+        return "Сотрудник " + id +
+                ": " + fio +
+                ", отдел: " + department +
+                ", зарплата: " + salary;
     }
 
 
