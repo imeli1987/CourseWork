@@ -1,15 +1,38 @@
 public class EmployeeBook {
 
-    private static final Employee[] employees = {
-            new Employee("Иванов Иван Иванович", 1, 50000),
-            new Employee("Иванов Макар Иванович", 2, 80000),
-            new Employee("Иванов Дмитрий Иванович", 3, 60000),
-            new Employee("Иванов Евгений Иванович", 5, 65000),
-            new Employee("Иванов Семён Иванович", 1, 56000),
-            new Employee("Иванов Максим Иванович", 2, 66000),
+    private final Employee[] employees;
+    private int size;
 
-    };
+    public EmployeeBook() {
+        this.employees = new Employee[10];
+    }
 
+    public boolean findAddEmployee() {
+        if (size >= employees.length) {
+            return false;
+        }
+        return true;
+    }
+    public final void addEmployee(String fio, int department, int salary) {
+        if (findAddEmployee()) {
+            Employee newEmployee = new Employee(fio, department, salary);
+            employees[size++] = newEmployee;
+        } else {
+            System.out.println("Невозможно добавить сотрудника, нет места");
+        }
+    }
+
+    public void removeEmployee(int id) {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i].getId() == id) {
+                System.out.println(employees[i].getId() + " удален");
+                System.arraycopy(employees, i + 1, employees, i, size - i - 1);
+                employees[size - 1] = null;
+                size--;
+                return;
+            }
+        }
+    }
     public final void getSalarySum() {
         int sum = 0;
         for (Employee employee : employees) {
@@ -20,7 +43,9 @@ public class EmployeeBook {
 
     public final void printEmployees() {
         for (Employee employee : employees) {
-            System.out.println(employee);
+            if (employee != null) {
+                System.out.println(employee);
+            }
         }
     }
 
@@ -30,10 +55,10 @@ public class EmployeeBook {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getSalary() < min) {
                 min = employees[i].getSalary();
-                id = i;
+                id = employees[i].getId() - 1;
             }
         }
-        System.out.println("Min: " + employees[id]);
+        System.out.println("Сотрудник с минимальной зарплатой: " + employees[id]);
     }
 
     public final void maxSalary() {
@@ -42,18 +67,19 @@ public class EmployeeBook {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getSalary() > max) {
                 max = employees[i].getSalary();
-                id = i;
+                id = employees[i].getId() - 1;
+
             }
         }
-        System.out.println("Max: " + employees[id]);
+        System.out.println("Сотрудник с максимальной зарплатой: " + employees[id]);
     }
 
     public final void averageSalary() {
         double salarySum = 0;
         for (Employee employee : employees) {
-            salarySum = employee.getSalary();
+            salarySum += employee.getSalary();
         }
-        System.out.println(salarySum / employees.length);
+        System.out.println("Средняя зарплата: " + salarySum / employees.length);
     }
 
     public final void printFio() {
@@ -76,11 +102,11 @@ public class EmployeeBook {
             if (employees[i].getDepartment() == department) {
                 if (employees[i].getSalary() < min) {
                     min = employees[i].getSalary();
-                    id = i;
+                    id = employees[i].getId() - 1;
                 }
             }
         }
-        System.out.println(employees[id]);
+        System.out.println("Сотрудник с минимальной зарплатой в отделе: " + employees[id]);
     }
 
     public final void maxDepartmentSalary(int department) {
@@ -90,25 +116,25 @@ public class EmployeeBook {
             if (employees[i].getDepartment() == department) {
                 if (employees[i].getSalary() > max) {
                     max = employees[i].getSalary();
-                    id = i;
+                    id = employees[i].getId() - 1;
                 }
             }
         }
-        System.out.println(employees[id]);
+        System.out.println("Сотрудник с максимальной зарплатой в отделе: " + employees[id]);
     }
 
     public final void sumDepartmentSalary(int department) {
-        int sum = 0;
+        double sum = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getDepartment() == department) {
                 sum += employees[i].getSalary();
             }
         }
-        System.out.println(sum);
+        System.out.println("Сумма зарплат в отделе: " + sum);
     }
 
     public final void averageDepartmentSalary(int department) {
-        int sum = 0;
+        double sum = 0;
         int count = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getDepartment() == department) {
@@ -116,7 +142,7 @@ public class EmployeeBook {
                 count++;
             }
         }
-        System.out.println(sum / count);
+        System.out.println("Средняя зарплата в отделе: " + sum / count);
     }
 
     public final void indexDepartmentSalary(int department, int percent) {
@@ -138,61 +164,35 @@ public class EmployeeBook {
     public final void salaryLessThanMin(int salaryLess) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getSalary() < salaryLess) {
-                System.out.println("Сотрудник " + (i + 1) + ": " + employees[i].getFio() + ", " + employees[i].getSalary());
+            //    System.out.println("Сотрудник " + employees[i].getId() + ": " + employees[i].getFio() + ", " + employees[i].getSalary());
+                System.out.println(employees[i]);
 
             }
         }
     }
 
-    public final void salaryLessThanMax(int salaryLess) {
+    public final void salaryMoreThanMax(int salaryLess) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getSalary() >= salaryLess) {
-                System.out.println("Сотрудник " + (i + 1) + ": " + employees[i].getFio() + ", " + employees[i].getSalary());
+            //    System.out.println("Сотрудник " + employees[i].getId() + ": " + employees[i].getFio() + ", " + employees[i].getSalary());
+                System.out.println(employees[i]);
 
             }
         }
     }
-
     public final void id(int id) {
         id = id - 1;
         System.out.println(employees[id]);
     }
-
-    public final boolean addEmployee() {
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) {
-                employees[i] = employee;
-                return false;
-            } else {
-                System.out.println("Свободных мест нет");
-            }
-        }
-        return true;
-    }
-
-    public final boolean deleteEmployee(int id) {
-        for (Employee employee: employees) {
-            if (employee.getId() == id && employee != null) {
-                employee = null;
-                return true;
-            }
-        }
-        return false;
-    }
     public final void printEmployeeId ( int id) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getId() == id) {
+            if (employees[i].getId() == id && employees[i] != null) {
                 System.out.println(employees[i]);
+                break;
+            } else {
+                System.out.println("Сотрудник не найден");
+                break;
             }
         }
     }
-//    public final void addEmployee(String fio, int department, int salary){
-//        for (int i = 0; i < employees.length; i++){
-//            if (searchEmployee()){
-//                employees[i] = new Employee(fio, department, salary);
-//                break;
-//            }
-//            System.out.println("Свободных мест нет");
-////        }
-//    }
 }
