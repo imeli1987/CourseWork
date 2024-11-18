@@ -6,12 +6,12 @@ public class Main {
         employeeBook.addEmployee("Петров", 2, 65000);
         employeeBook.addEmployee("Сидоров", 3, 80000);
         employeeBook.addEmployee("Михайлов", 4, 79000);
-        employeeBook.addEmployee("Поляков", 5, 40000);
+        employeeBook.addEmployee("Поляков", 2, 40000);
         employeeBook.addEmployee("Лебедев", 1, 68000);
         employeeBook.addEmployee("Васильев", 2, 99000);
         employeeBook.addEmployee("Булгаков", 3, 76000);
         employeeBook.addEmployee("Пушкин", 4, 57000);
-        employeeBook.addEmployee("Есенин", 5, 51000);
+        employeeBook.addEmployee("Есенин", 1, 51000);
 
         System.out.println("Печать всех");
         employeeBook.printEmployees(); // Список всех сотрудников
@@ -43,7 +43,7 @@ public class Main {
         employeeBook.sumDepartmentSalary(1); // Сумма зарплаты по отделу
         System.out.println();
 
-        employeeBook.averageDepartmentSalary(1);  // Средняя зарплата по отделу
+        employeeBook.averageDepartmentSalary(5);  // Средняя зарплата по отделу
         System.out.println();
 
         employeeBook.indexDepartmentSalary(1, 10); // Индексирование зарплаты в отделе
@@ -59,6 +59,9 @@ public class Main {
         System.out.println();
 
         employeeBook.addEmployee("Смирнов", 1, 100000); // Добавление нового сотрудника
+
+        employeeBook.removeEmployee(1);  // Удаление сотрудника
+        System.out.println();
 
         employeeBook.removeEmployee(1);  // Удаление сотрудника
         System.out.println();

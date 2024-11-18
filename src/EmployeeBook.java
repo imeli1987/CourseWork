@@ -24,6 +24,10 @@ public class EmployeeBook {
 
     public void removeEmployee(int id) {
         for (int i = 0; i < employees.length; i++) {
+            if (employees[i] == null) {
+                System.out.println("Сотрудник с id " + id + " не найден");
+                continue;
+            }
             if (employees[i].getId() == id) {
                 System.out.println(employees[i].getId() + " удален");
                 System.arraycopy(employees, i + 1, employees, i, size - i - 1);
@@ -78,6 +82,10 @@ public class EmployeeBook {
         double salarySum = 0;
         for (Employee employee : employees) {
             salarySum += employee.getSalary();
+        }
+        if (employees.length == 0) {
+            System.out.println("Средняя зарплата: 0");
+            return;
         }
         System.out.println("Средняя зарплата: " + salarySum / employees.length);
     }
@@ -137,10 +145,15 @@ public class EmployeeBook {
         double sum = 0;
         int count = 0;
         for (int i = 0; i < employees.length; i++) {
+
             if (employees[i].getDepartment() == department) {
                 sum += employees[i].getSalary();
                 count++;
             }
+        }
+        if (count == 0) {
+            System.out.println("Средняя зарплата в отделе: 0");
+            return;
         }
         System.out.println("Средняя зарплата в отделе: " + sum / count);
     }
