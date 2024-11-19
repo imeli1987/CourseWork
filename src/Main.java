@@ -2,16 +2,16 @@ public class Main {
     public static void main(String[] args) {
         EmployeeBook employeeBook = new EmployeeBook();
 
-        employeeBook.addEmployee("Иванов", 1, 50000);
-        employeeBook.addEmployee("Петров", 2, 65000);
-        employeeBook.addEmployee("Сидоров", 3, 80000);
-        employeeBook.addEmployee("Михайлов", 4, 79000);
-        employeeBook.addEmployee("Поляков", 2, 40000);
-        employeeBook.addEmployee("Лебедев", 1, 68000);
-        employeeBook.addEmployee("Васильев", 2, 99000);
-        employeeBook.addEmployee("Булгаков", 3, 76000);
-        employeeBook.addEmployee("Пушкин", 4, 57000);
-        employeeBook.addEmployee("Есенин", 1, 51000);
+//        employeeBook.addEmployee("Иванов", 1, 50000);
+//        employeeBook.addEmployee("Петров", 2, 65000);
+//        employeeBook.addEmployee("Сидоров", 3, 80000);
+//        employeeBook.addEmployee("Михайлов", 4, 79000);
+//        employeeBook.addEmployee("Поляков", 2, 40000);
+//        employeeBook.addEmployee("Лебедев", 1, 68000);
+//        employeeBook.addEmployee("Васильев", 2, 99000);
+//        employeeBook.addEmployee("Булгаков", 3, 76000);
+//        employeeBook.addEmployee("Пушкин", 4, 57000);
+//        employeeBook.addEmployee("Есенин", 1, 51000);
 
         System.out.println("Печать всех");
         employeeBook.printEmployees(); // Список всех сотрудников
@@ -59,6 +59,8 @@ public class Main {
         System.out.println();
 
         employeeBook.addEmployee("Смирнов", 1, 100000); // Добавление нового сотрудника
+        employeeBook.printEmployees();
+
 
         employeeBook.removeEmployee(1);  // Удаление сотрудника
         System.out.println();
